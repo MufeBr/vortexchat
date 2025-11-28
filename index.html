@@ -7,14 +7,14 @@
     <title>PointTalk — Auto Match</title>
 
     <style>
-         :root {
+        :root {
             --accent: #104bff;
             --primary: #000;
             --danger: #ff4444;
             --muted: #6b7280;
             font-family: Arial, Helvetica, sans-serif;
         }
-        
+
         html,
         body {
             width: 100vw;
@@ -26,8 +26,8 @@
             display: flex;
             flex-direction: column;
         }
+
         /* LOGIN */
-        
         #login-screen {
             position: fixed;
             inset: 0;
@@ -38,7 +38,7 @@
             z-index: 9999;
             padding: 20px;
         }
-        
+
         #login-box {
             width: 100%;
             max-width: 360px;
@@ -48,7 +48,7 @@
             box-shadow: 0 6px 20px rgba(2, 6, 23, 0.08);
             text-align: center;
         }
-        
+
         #login-box input {
             width: 100%;
             padding: 12px;
@@ -57,7 +57,7 @@
             margin-top: 10px;
             font-size: 16px;
         }
-        
+
         #login-box button {
             width: 100%;
             padding: 12px;
@@ -69,15 +69,15 @@
             margin-top: 12px;
             cursor: pointer;
         }
-        
+
         #error-message {
             color: var(--danger);
             font-size: 14px;
             margin-bottom: 12px;
             display: none;
         }
+
         /* HEADER */
-        
         header.desktop-header,
         header.mobile-header {
             position: fixed;
@@ -89,7 +89,7 @@
             font-weight: 700;
             z-index: 100;
         }
-        
+
         header.desktop-header {
             top: 0;
             height: 64px;
@@ -99,7 +99,7 @@
             font-size: 20px;
             display: none;
         }
-        
+
         header.mobile-header {
             top: 0;
             height: 64px;
@@ -108,8 +108,8 @@
             font-size: 22px;
             display: none;
         }
+
         /* CHAT */
-        
         #chat-container {
             display: none;
             height: 100%;
@@ -118,24 +118,38 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         #badCounterWrapper {
             color: white;
             text-align: center;
             font-size: 13px;
             padding-top: 4px;
         }
-        
+
         #badCounter {
             display: none;
         }
-        
+
         #muteTimer {
             font-size: 12px;
             margin-top: 2px;
             color: #ffe9e9;
         }
-        
+
+        /* nome da sala em cima da caixa */
+        .chat-top-bar {
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .room-name {
+            font-weight: bold;
+        }
+
         .chat-box {
             background: white;
             border-radius: 10px;
@@ -144,9 +158,9 @@
             padding: 12px;
             display: flex;
             flex-direction: column;
-            margin: 8px 12px 12px 12px;
+            margin: 4px 12px 4px 12px;
         }
-        
+
         .msg-me {
             background: rgb(8, 8, 240);
             color: white;
@@ -156,7 +170,7 @@
             max-width: 78%;
             align-self: flex-end;
         }
-        
+
         .msg-them {
             background: #eef2f7;
             color: #2f00ff;
@@ -166,12 +180,12 @@
             max-width: 78%;
             align-self: flex-start;
         }
-        
+
         .msg-blocked {
             opacity: 0.6;
             text-decoration: line-through;
         }
-        
+
         .system {
             background: #ffe0e0;
             padding: 8px;
@@ -179,7 +193,16 @@
             margin: 6px 0;
             font-style: italic;
         }
-        
+
+        /* linha "digitando..." */
+        #typingIndicator {
+            font-size: 12px;
+            color: #fefefe;
+            padding: 0 16px 4px 16px;
+            min-height: 16px;
+            font-style: italic;
+        }
+
         .input-fixed {
             display: flex;
             gap: 8px;
@@ -187,35 +210,45 @@
             padding: 12px;
             border-top: 1px solid #ddd;
         }
-        
+
         .input-fixed input {
             flex: 1;
             padding: 12px;
             border: 1px solid #272727;
             border-radius: 10px;
         }
-        
+
         .input-fixed button {
             padding: 12px;
             border-radius: 10px;
             border: 0;
             cursor: pointer;
         }
-        
+
         #chatSend {
             background: #1861ff;
             color: white;
         }
-        
+
         #emojiBtn {
             background: #ffcc00;
         }
-        
-        #skipBtn {
-            background: #fff;
-        }
+
+        #clearChatBtn {
+    background: #1861ff;
+    border: none;
+    border-radius: 10px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#clearChatBtn svg {
+    fill: #ffffff;
+}
+
         /* EMOJIS */
-        
         #emojiPicker {
             display: none;
             background: white;
@@ -230,14 +263,14 @@
             flex-wrap: wrap;
             z-index: 1000;
         }
-        
+
         #emojiPicker .emoji {
             cursor: pointer;
             font-size: 20px;
             padding: 4px;
         }
+
         /* ALERT PANEL */
-        
         #alertPanel {
             display: none;
             position: fixed;
@@ -247,20 +280,20 @@
             justify-content: center;
             align-items: center;
         }
-        
-        #alertPanel div {
+
+        #alertPanel > div {
             background: white;
             padding: 20px;
             border-radius: 12px;
             max-width: 300px;
             text-align: center;
         }
-        
+
         #alertPanel p {
             font-size: 16px;
             margin-bottom: 20px;
         }
-        
+
         #alertPanel button {
             padding: 10px 20px;
             border: none;
@@ -295,10 +328,23 @@
             <div id="muteTimer"></div>
         </div>
 
+        <!-- nome da sala -->
+        <div class="chat-top-bar">
+            <span class="room-name"></span>
+        </div>
+
+        <!-- indicador de que alguém está digitando -->
+        <div id="typingIndicator"></div>
+
         <div class="chat-box" id="chatBox"></div>
         <div class="input-fixed">
             <button id="emojiBtn">😀</button>
-            <button id="skipBtn">Skip</button>
+            <!-- botão lixeira embaixo, no meio -->
+            <button id="clearChatBtn" aria-label="Limpar chat">
+    <svg viewBox="0 0 24 24" width="22" height="22">
+        <path d="M3 6h18v2H3V6zm2 3h14l-1.5 11.5a2 2 0 0 1-2 1.5h-7a2 2 0 0 1-2-1.5L5 9zm5 2v8h2v-8H10zm4 0v8h2v-8h-2zM9 4h6v2H9V4z"/>
+    </svg>
+</button>
             <input id="chatInput" placeholder="Message" disabled />
             <button id="chatSend" type="button">Enviar</button>
         </div>
@@ -337,22 +383,27 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        const GEMINI_API_KEY = "AIzaSyDpd8WNwikWZvSXRyNQpra9TsMJDBXjx2A";
+        const GEMINI_API_KEY = "AIzaSyDaKg9-7yJAc_TMDhPJb1p9G2qzMuaBZaY";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyB4U9ZnUPJBFhjsoXDWeoATLMcIz0cWgzo",
-            authDomain: "apike-99bd4.firebaseapp.com",
-            databaseURL: "https://apike-99bd4-default-rtdb.firebaseio.com",
-            projectId: "apike-99bd4",
-            storageBucket: "apike-99bd4.firebasestorage.app",
-            messagingSenderId: "299668106950",
-            appId: "1:299668106950:web:a2b7c3250f8070640e31c7"
+            apiKey: "AIzaSyAYMXW6QNVaHG0_xd09Zn0QuSrlro3Jd9k",
+            authDomain: "api-c1c81-f8d1f.firebaseapp.com",
+            databaseURL: "https://api-c1c81-f8d1f-default-rtdb.firebaseio.com",
+            projectId: "api-c1c81-f8d1f",
+            storageBucket: "api-c1c81-f8d1f.appspot.com",
+            messagingSenderId: "1050870116560",
+            appId: "1:1050870116560:web:480695d6ae41d03575eed5"
         };
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
+        // sala geral fixa
+        const GENERAL_ROOM_PATH = "rooms/global/messages";
+        const TYPING_PATH = "rooms/global/typing";
+
         let username = null;
+        let userId = null; // id único do usuário
 
         let badCount = 0;
         const BAD_LIMIT = 5;
@@ -369,7 +420,6 @@
         const chatBox = document.getElementById("chatBox");
         const chatInput = document.getElementById("chatInput");
         const chatSend = document.getElementById("chatSend");
-        const skipBtn = document.getElementById("skipBtn");
         const emojiBtn = document.getElementById("emojiBtn");
         const emojiPicker = document.getElementById("emojiPicker");
 
@@ -379,6 +429,11 @@
 
         const badCounterLabel = document.getElementById("badCounter");
         const muteTimerLabel = document.getElementById("muteTimer");
+        const clearChatBtn = document.getElementById("clearChatBtn");
+        const typingIndicator = document.getElementById("typingIndicator");
+
+        let typingTimeout = null;
+        let isCurrentlyTyping = false;
 
         function updateBadCounter() {
             badCounterLabel.textContent = "";
@@ -432,25 +487,17 @@
                     out = data.candidates[0].content.parts[0].text.trim();
                 }
 
-                if (!out) return {
-                    status: "allow"
-                };
+                if (!out) return { status: "allow" };
 
                 if (out.toUpperCase().includes("BLOCK")) {
-                    return {
-                        status: "block"
-                    };
+                    return { status: "block" };
                 }
 
-                return {
-                    status: "allow"
-                };
+                return { status: "allow" };
 
             } catch (e) {
                 console.error("AI error:", e);
-                return {
-                    status: "allow"
-                };
+                return { status: "allow" };
             }
         }
 
@@ -464,7 +511,7 @@
             const totalSec = Math.floor(diffMs / 1000);
             const min = String(Math.floor(totalSec / 60)).padStart(2, "0");
             const sec = String(totalSec % 60).padStart(2, "0");
-            return `${min}:${sec}`;
+            return ${min}:${sec};
         }
 
         function startMuteCountdown() {
@@ -473,7 +520,7 @@
                 muteInterval = null;
             }
 
-            muteTimerLabel.textContent = `Silenciado devido uso linguagem imprópria: ${formatRemaining()}`;
+            muteTimerLabel.textContent = Silenciado devido uso linguagem imprópria: ${formatRemaining()};
 
             muteInterval = setInterval(() => {
                 if (!isMuted()) {
@@ -499,7 +546,62 @@
             }
         }
 
-        // LOGIN + LIMPAR MENSAGENS
+        // marcar que este usuário está ou não está digitando
+        function setTypingState(isTyping) {
+            if (!userId) return;
+            isCurrentlyTyping = isTyping;
+            db.ref(${TYPING_PATH}/${userId}).set({
+                username,
+                typing: isTyping,
+                ts: Date.now()
+            });
+        }
+
+        // atualizar texto "alguém está digitando..."
+        function updateTypingIndicatorFromSnapshot(snapshot) {
+            const data = snapshot.val() || {};
+            const typingUsers = [];
+
+            Object.keys(data).forEach(id => {
+                const info = data[id];
+                if (!info) return;
+                if (id === userId) return; // não mostra nós mesmos
+                if (info.typing) {
+                    typingUsers.push(info.username || "Alguém");
+                }
+            });
+
+            if (typingUsers.length === 0) {
+                typingIndicator.textContent = "";
+            } else if (typingUsers.length === 1) {
+                typingIndicator.textContent = ${typingUsers[0]} está digitando...;
+            } else if (typingUsers.length === 2) {
+                typingIndicator.textContent = ${typingUsers[0]} e ${typingUsers[1]} estão digitando...;
+            } else {
+                typingIndicator.textContent = ${typingUsers[0]}, ${typingUsers[1]} outros estão digitando...;
+            }
+        }
+
+        // escutar typing dos outros
+        function listenTyping() {
+            db.ref(TYPING_PATH).on("value", snap => {
+                updateTypingIndicatorFromSnapshot(snap);
+            });
+        }
+
+        // escutar mensagens do chat geral
+        function listenMessages() {
+            db.ref(GENERAL_ROOM_PATH).on("child_added", snap => {
+                const msg = snap.val();
+                if (!msg) return;
+
+                if (msg.user !== username) {
+                    addMsg("msg-them", <b>${msg.user}:</b> ${msg.text});
+                }
+            });
+        }
+
+        // LOGIN + ENTRAR NO CHAT GERAL
         loginBtn.onclick = () => {
             username = usernameInput.value.trim();
 
@@ -507,6 +609,9 @@
                 errorMessage.style.display = "block";
                 return;
             }
+
+            // cria um id simples pro usuário (só pra sessão)
+            userId = "u_" + Math.random().toString(36).slice(2);
 
             errorMessage.style.display = "none";
             loginScreen.style.display = "none";
@@ -525,28 +630,24 @@
             updateBadCounter();
             applyMuteState();
 
-            // limpar todas as mensagens do Firebase
-            db.ref("messages").remove().then(() => {
-                listenMessages();
-            }).catch(err => {
-                console.error("Error clearing messages:", err);
-                listenMessages();
-            });
+            // escutar mensagens e typing
+            listenMessages();
+            listenTyping();
         };
 
-        // SEND MESSAGE
-        chatSend.onclick = async() => {
+        // ENVIAR MENSAGEM
+        chatSend.onclick = async () => {
             if (isMuted()) {
-                addSystemMsg(`Você está silenciado Aguarde .`);
+                addSystemMsg(Você está silenciado. Aguarde terminar o tempo.);
                 return;
             }
 
             let txt = chatInput.value.trim();
             if (!txt) return;
 
-            const myBubble = addMsg("msg-me", `<b>${username}:</b> ${txt}`);
+            const myBubble = addMsg("msg-me", <b>${username}:</b> ${txt});
 
-            const ref = db.ref("messages").push({
+            const ref = db.ref(GENERAL_ROOM_PATH).push({
                 user: username,
                 text: txt,
                 time: Date.now()
@@ -554,7 +655,10 @@
 
             chatInput.value = "";
 
-            (async() => {
+            // parou de digitar ao enviar
+            setTypingState(false);
+
+            (async () => {
                 const mod = await geminiModerate(txt);
 
                 if (mod.status === "block") {
@@ -562,21 +666,20 @@
                     updateBadCounter();
 
                     myBubble.classList.add("msg-blocked");
-                    myBubble.innerHTML = `<b>${username}:</b> [blocked by moderation]`;
+                    myBubble.innerHTML = <b>${username}:</b> [blocked by moderation];
 
                     ref.remove();
 
                     if (badCount >= BAD_LIMIT && !isMuted()) {
-                        const TEN_MIN = 10 * 60 * 1000;
+       const TEN_MIN = 10 * 60 * 1000;
                         muteUntil = Date.now() + TEN_MIN;
                         applyMuteState();
                         addSystemMsg("Suspensão por 9 minutos");
 
-                        // 🔴 TEXTO QUANDO O CHAT É SUSPENSO
                         alertText.innerHTML = `
                             !<br>
                             CHAT SUSPENSO<br><br>
-                      Suspensão por 9 minutos<br>
+                            🚫 Suspensão por 9 minutos<br>
                             Desativamos seu bate-papo no chat porque você pode ter usado linguagem que quebra as regras do Site
                         `;
                         alertPanel.style.display = "flex";
@@ -586,7 +689,6 @@
 
                         startMuteCountdown();
                     } else {
-                        // 🟡 TEXTO DE AVISO SIMPLES
                         alertText.innerHTML = `
                             Linguagem inadequada detectamos.<br>
                             uso de palavras que pode viola.
@@ -600,44 +702,50 @@
             })();
         };
 
-        // Enter also sends
+        // ENTER também envia
         chatInput.addEventListener("keydown", e => {
             if (e.key === "Enter") {
                 e.preventDefault();
                 chatSend.click();
+            } else {
+                // qualquer tecla: marcar como digitando
+                if (!isMuted()) {
+                    if (!isCurrentlyTyping) {
+                        setTypingState(true);
+                    }
+                    if (typingTimeout) clearTimeout(typingTimeout);
+                    typingTimeout = setTimeout(() => {
+                        setTypingState(false);
+                    }, 2000);
+                }
             }
         });
 
-        // REAL-TIME MESSAGES (others)
-        function listenMessages() {
-            db.ref("messages").on("child_added", snap => {
-                const msg = snap.val();
-                if (!msg) return;
+        // BOTÃO LIMPAR CHAT (sem alert do navegador)
 
-                if (msg.user !== username) {
-                    addMsg("msg-them", `<b>${msg.user}:</b> ${msg.text}`);
-                }
-            });
-        }
-
-        // SKIP
-        skipBtn.onclick = () => {
+        clearChatBtn.onclick = () => {
+         db.ref(GENERAL_ROOM_PATH).remove()
+        .then(() => {
             chatBox.innerHTML = "";
-            addSystemMsg("Você pulou a conversa");
+        })
+        .catch(err => {
+            console.error("Erro ao limpar chat:", err);
+            addSystemMsg("Erro ao limpar o chat.");
+        });
         };
 
         // EMOJIS
         emojiBtn.onclick = () => {
             emojiPicker.style.display =
-                (emojiPicker.style.display === "none" || emojiPicker.style.display === "") ?
-                "flex" :
-                "none";
+                (emojiPicker.style.display === "none" || emojiPicker.style.display === "")
+                    ? "flex"
+                    : "none";
         };
 
         document.querySelectorAll(".emoji").forEach(em => {
             em.onclick = () => {
                 if (isMuted()) {
-                    addSystemMsg("Você não pode usa emoji agora por seu silenciamento do chat.");
+                    addSystemMsg("Você não pode usar emoji agora por seu silenciamento do chat.");
                     return;
                 }
                 chatInput.value += em.textContent;
